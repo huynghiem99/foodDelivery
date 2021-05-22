@@ -11,17 +11,17 @@ import android.widget.TextView;
 import com.rajendra.foodapp.R;
 import com.rajendra.foodapp.model.Food;
 
-import java.util.List;
+import java.util.ArrayList;
+
+
 
 public class FoodAdapter extends BaseAdapter {
 
     private Context context;
-    private int layout;
-    private List<Food> foods;
+    private ArrayList<Food> foods;
 
-    public FoodAdapter(Context context, int layout, List<Food> foods) {
+    public FoodAdapter(Context context, ArrayList<Food> foods) {
         this.context = context;
-        this.layout = layout;
         this.foods = foods;
     }
 
@@ -32,48 +32,37 @@ public class FoodAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return foods.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return 0;
-    }
-
-    private class ViewHolder{
-        ImageView imageFood;
-        TextView nameFood;
-        TextView priceFood;
-        TextView nameRestaurent;
-        TextView ratingFood;
+        return i;
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        FoodAdapter.ViewHolder viewHolder;
+        View viewHolder;
         if(view == null) {
-            viewHolder = new FoodAdapter.ViewHolder();
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(layout, null);
-            viewHolder.imageFood = (ImageView) view.findViewById(R.id.imagePopular);
-            viewHolder.nameFood = (TextView) view.findViewById(R.id.nameGeneralFood);
-            viewHolder.priceFood = (TextView) view.findViewById(R.id.pricePopular);
-            viewHolder.ratingFood = (TextView) view.findViewById(R.id.rating);
-            viewHolder.nameRestaurent = (TextView) view.findViewById(R.id.restorant_name);
-
-            view.setTag(viewHolder);
+            viewHolder = View.inflate(viewGroup.getContext(),R.layout.asia_food_row_item,null);
 
         } else  {
-            viewHolder = (FoodAdapter.ViewHolder) view.getTag();
+           viewHolder = view;
         }
 
+        ImageView imageFood = viewHolder.findViewById(R.id.imagePopular);
+        TextView nameFood = viewHolder.findViewById(R.id.namePopular);
+        TextView priceFood = viewHolder.findViewById(R.id.pricePopular);
+        TextView nameRestaurent = viewHolder.findViewById(R.id.restorant_name);
+        TextView ratingFood = viewHolder.findViewById(R.id.rating);
+
         Food food = foods.get(i);
-        viewHolder.imageFood.setImageResource(food.getImageUrl());
-        viewHolder.nameFood.setText(food.getName());
-        viewHolder.priceFood.setText(food.getPrice());
-        viewHolder.ratingFood.setText(food.getRating());
-        viewHolder.nameRestaurent.setText(food.getRestorantname());
-        return view;
+        imageFood.setImageResource(food.getImageUrl());
+        nameFood.setText(food.getName());
+        priceFood.setText(food.getPrice());
+        ratingFood.setText(food.getRating());
+        nameRestaurent.setText(food.getRestorantname());
+        return viewHolder;
     }
 
 }

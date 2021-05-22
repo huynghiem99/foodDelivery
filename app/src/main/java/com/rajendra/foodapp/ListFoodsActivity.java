@@ -3,7 +3,9 @@ package com.rajendra.foodapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Adapter;
 import android.widget.GridView;
+import android.widget.ListAdapter;
 
 import com.rajendra.foodapp.adapter.FoodAdapter;
 import com.rajendra.foodapp.model.Food;
@@ -19,7 +21,7 @@ public class ListFoodsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list_foods);
         AnhXa();
         DataList();
         BindData();
@@ -44,7 +46,7 @@ public class ListFoodsActivity extends AppCompatActivity {
     }
 
     private  void BindData(){
-        foodAdapter = new FoodAdapter(this, R.layout.asia_food_row_item, foodList);
+        foodAdapter = new FoodAdapter(getApplicationContext(), foodList);
         gvListFood.setAdapter(foodAdapter);
     }
 }

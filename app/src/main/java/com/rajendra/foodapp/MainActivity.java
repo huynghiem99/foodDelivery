@@ -2,10 +2,13 @@ package com.rajendra.foodapp;
 
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.content.Intent;
+import android.widget.ListAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private  void BindData(){
-        generalFoodAdapter = new GeneralFoodAdapter(this, R.layout.genral_food_item, generalFoodList);
+        generalFoodAdapter = new GeneralFoodAdapter(getApplicationContext(), generalFoodList);
         gvGeneralFood.setAdapter(generalFoodAdapter);
     }
 
@@ -58,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openFoodListScreen() {
-        Intent intent = new Intent(this, ListFoodsActivity.class);
+        Intent intent = new Intent(MainActivity.this, ListFoodsActivity.class);
         startActivity(intent);
     }
 }

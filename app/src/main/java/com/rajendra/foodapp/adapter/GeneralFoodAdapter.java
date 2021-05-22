@@ -3,6 +3,7 @@ package com.rajendra.foodapp.adapter;
 import android.content.Context;
 
 import android.view.LayoutInflater;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,19 +11,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rajendra.foodapp.R;
+import com.rajendra.foodapp.model.Food;
 import com.rajendra.foodapp.model.GeneralFood;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GeneralFoodAdapter extends BaseAdapter {
 
     private Context context;
-    private int layout;
-    private List<GeneralFood> generalFoods;
+    private ArrayList<GeneralFood> generalFoods;
 
-    public GeneralFoodAdapter(Context context, int layout, List<GeneralFood> generalFoods) {
+    public GeneralFoodAdapter(Context context, ArrayList<GeneralFood> generalFoods) {
         this.context = context;
-        this.layout = layout;
         this.generalFoods = generalFoods;
     }
 
@@ -33,38 +34,30 @@ public class GeneralFoodAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return generalFoods.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return 0;
-    }
-
-    private class ViewHolder{
-        ImageView imageFood;
-        TextView nameFood;
+        return i;
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHolder viewHolder;
+        View viewHolder;
         if(view == null) {
-            viewHolder = new ViewHolder();
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(layout, null);
-            viewHolder.imageFood = (ImageView) view.findViewById(R.id.imgGeneralFood);
-            viewHolder.nameFood = (TextView) view.findViewById(R.id.nameGeneralFood);
-
-            view.setTag(viewHolder);
+            viewHolder = View.inflate(viewGroup.getContext(),R.layout.genral_food_item,null);
 
         } else  {
-            viewHolder = (ViewHolder) view.getTag();
+            viewHolder = view;
         }
 
+        ImageView imageFood = viewHolder.findViewById(R.id.imgGeneralFood);
+        TextView nameFood = viewHolder.findViewById(R.id.nameGeneralFood);
+
         GeneralFood generalFood = generalFoods.get(i);
-        viewHolder.imageFood.setImageResource(generalFood.getImageGeneral());
-        viewHolder.nameFood.setText(generalFood.getName());
-        return view;
+        imageFood.setImageResource(generalFood.getImageGeneral());
+        nameFood.setText(generalFood.getName());
+        return viewHolder;
     }
 }
