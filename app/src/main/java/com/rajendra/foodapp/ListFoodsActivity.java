@@ -3,9 +3,11 @@ package com.rajendra.foodapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListAdapter;
@@ -58,6 +60,7 @@ public class ListFoodsActivity extends AppCompatActivity {
 
     private void Event() {
         this.BackEvent();
+        this.EventClickItems();
     }
 
     private void BackEvent(){
@@ -67,5 +70,19 @@ public class ListFoodsActivity extends AppCompatActivity {
                 ListFoodsActivity.super.onBackPressed();
             }
         });
+    }
+
+    private void EventClickItems(){
+        gvListFood.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                openFoodListScreen();
+            }
+        });
+    }
+
+    private void openFoodListScreen() {
+        Intent intent = new Intent(ListFoodsActivity.this, DetailsActivity.class);
+        startActivity(intent);
     }
 }
