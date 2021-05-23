@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -15,6 +16,7 @@ import android.widget.ListAdapter;
 import com.rajendra.foodapp.adapter.FoodAdapter;
 import com.rajendra.foodapp.model.Food;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ListFoodsActivity extends AppCompatActivity {
@@ -41,16 +43,19 @@ public class ListFoodsActivity extends AppCompatActivity {
 
     private void DataList() {
         foodList = new ArrayList<>();
-        foodList.add(new Food("Chicago Pizza", "$20", R.drawable.asiafood1, "4.5", "Briand Restaurant"));
-        foodList.add(new Food("Chicago Pizza", "$20", R.drawable.asiafood2, "4.5", "Briand Restaurant"));
-        foodList.add(new Food("Chicago Pizza", "$20", R.drawable.asiafood2, "4.5", "Briand Restaurant"));
-        foodList.add(new Food("Chicago Pizza", "$20", R.drawable.asiafood1, "4.5", "Briand Restaurant"));
-        foodList.add(new Food("Chicago Pizza", "$20", R.drawable.asiafood1, "4.5", "Briand Restaurant"));
-        foodList.add(new Food("Chicago Pizza", "$20", R.drawable.asiafood2, "4.5", "Briand Restaurant"));
-        foodList.add(new Food("Chicago Pizza", "$20", R.drawable.asiafood1, "4.5", "Briand Restaurant"));
-        foodList.add(new Food("Chicago Pizza", "$20", R.drawable.asiafood2, "4.5", "Briand Restaurant"));
-        foodList.add(new Food("Chicago Pizza", "$20", R.drawable.asiafood1, "4.5", "Briand Restaurant"));
-        foodList.add(new Food("Chicago Pizza", "$20", R.drawable.asiafood2, "4.5", "Briand Restaurant"));
+        foodList.add(new Food("Chicago Pizza","Asia Food", "$30", R.drawable.asiafood1, "4.5", "Briand Restaurant",12,"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."));
+        foodList.add(new Food("Hanoi Pizza","Asia Food", "$40", R.drawable.asiafood1, "4.5", "Briand Restaurant",12,"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."));
+        foodList.add(new Food("Haiphong Pizza","Asia Food", "$50", R.drawable.asiafood1, "4.5", "Briand Restaurant",12,"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."));
+        foodList.add(new Food("HCM Pizza","Asia Food", "$60", R.drawable.asiafood1, "4.5", "Briand Restaurant",12,"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."));
+        foodList.add(new Food("New York Pizza","Asia Food", "$70", R.drawable.asiafood1, "4.5", "Briand Restaurant",12,"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."));
+        foodList.add(new Food("Chicago Pizza","Asia Food", "$80", R.drawable.asiafood1, "4.5", "Briand Restaurant",12,"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."));
+        foodList.add(new Food("Chicago Pizza","Asia Food", "$10", R.drawable.asiafood1, "4.5", "Briand Restaurant",12,"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."));
+        foodList.add(new Food("Chicago Pizza","Asia Food", "$21", R.drawable.asiafood1, "4.5", "Briand Restaurant",12,"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."));
+        foodList.add(new Food("Chicago Pizza","Asia Food", "$25", R.drawable.asiafood1, "4.5", "Briand Restaurant",12,"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."));
+        foodList.add(new Food("Chicago Pizza","Asia Food", "$28", R.drawable.asiafood1, "4.5", "Briand Restaurant",12,"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."));
+        foodList.add(new Food("Chicago Pizza","Asia Food", "$27", R.drawable.asiafood1, "4.5", "Briand Restaurant",12,"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."));
+        foodList.add(new Food("Chicago Pizza","Asia Food", "$35", R.drawable.asiafood1, "4.5", "Briand Restaurant",12,"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."));
+
     }
 
     private  void BindData(){
@@ -76,13 +81,10 @@ public class ListFoodsActivity extends AppCompatActivity {
         gvListFood.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                openFoodListScreen();
+                Intent intent = new Intent(ListFoodsActivity.this, DetailsActivity.class);
+                intent.putExtra("DetailFood", (Serializable) foodList.get(i));
+                startActivity(intent);
             }
         });
-    }
-
-    private void openFoodListScreen() {
-        Intent intent = new Intent(ListFoodsActivity.this, DetailsActivity.class);
-        startActivity(intent);
     }
 }

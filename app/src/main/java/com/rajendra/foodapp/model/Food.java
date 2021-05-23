@@ -1,19 +1,35 @@
 package com.rajendra.foodapp.model;
 
-public class Food {
+import java.io.Serializable;
+
+public class Food implements Serializable {
 
     String name;
+    String type;
     String price;
     Integer imageUrl;
     String rating;
     String restorantname;
+    int numberOrder;
+    String description;
 
-    public Food(String name, String price, Integer imageUrl, String rating, String restorantname) {
+    public Food(String name,String type, String price, Integer imageUrl, String rating, String restorantname,int numberOrder,String description) {
         this.name = name;
+        this.type = type;
         this.price = price;
         this.imageUrl = imageUrl;
         this.rating = rating;
         this.restorantname = restorantname;
+        this.numberOrder = numberOrder;
+        this.description = description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getRating() {
@@ -54,5 +70,21 @@ public class Food {
 
     public void setImageUrl(Integer imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public int getNumberOrder() {
+        return numberOrder;
+    }
+
+    public void setNumberOrder(int numberOrder) {
+        this.numberOrder = numberOrder;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
