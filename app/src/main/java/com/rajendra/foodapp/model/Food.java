@@ -1,16 +1,32 @@
 package com.rajendra.foodapp.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Food implements Serializable {
 
+    @SerializedName("name")
     String name;
+
+    @SerializedName("type")
     String type;
+
+    @SerializedName("price")
     String price;
+
+    @SerializedName("foodImageUrl")
     Integer imageUrl;
+
+    @SerializedName("rating")
     String rating;
+
+    @SerializedName("nameRestaurent")
     String restorantname;
+
     int numberOrder;
+
+    @SerializedName("description")
     String description;
 
     public Food(String name,String type, String price, Integer imageUrl, String rating, String restorantname,int numberOrder,String description) {

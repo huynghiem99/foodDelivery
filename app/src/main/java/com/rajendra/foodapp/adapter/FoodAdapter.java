@@ -10,17 +10,18 @@ import android.widget.TextView;
 
 import com.rajendra.foodapp.R;
 import com.rajendra.foodapp.model.Food;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class FoodAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<Food> foods;
+    private List<Food> foods;
 
-    public FoodAdapter(Context context, ArrayList<Food> foods) {
+    public FoodAdapter(Context context, List<Food> foods) {
         this.context = context;
         this.foods = foods;
     }

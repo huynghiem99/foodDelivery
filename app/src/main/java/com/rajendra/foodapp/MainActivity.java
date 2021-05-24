@@ -13,10 +13,19 @@ import android.widget.ListAdapter;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.rajendra.foodapp.Api.RetrofitInstance;
+import com.rajendra.foodapp.Api.RetrofitInterface;
 import com.rajendra.foodapp.adapter.GeneralFoodAdapter;
+import com.rajendra.foodapp.model.Food;
 import com.rajendra.foodapp.model.GeneralFood;
+import com.rajendra.foodapp.model.PhotoModel;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         DataList();
         BindData();
         EventClickItems();
+        callData();
     }
 
     private  void AnhXa(){
@@ -63,5 +73,21 @@ public class MainActivity extends AppCompatActivity {
     private void openFoodListScreen() {
         Intent intent = new Intent(MainActivity.this, ListFoodsActivity.class);
         startActivity(intent);
+    }
+
+    private void callData(){
+        RetrofitInterface retrofitInterface = RetrofitInstance.getRetrofitInstance().create(RetrofitInterface.class);
+        Call<List<PhotoModel>> listCall = retrofitInterface.getAllPhotos();
+        listCall.enqueue(new Callback<List<PhotoModel>>() {
+            @Override
+            public void onResponse(Call<List<PhotoModel>> call, Response<List<PhotoModel>> response) {
+                System.out.println(1);
+            }
+
+            @Override
+            public void onFailure(Call<List<PhotoModel>> call, Throwable t) {
+                System.out.println(2);
+            }
+        });
     }
 }

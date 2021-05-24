@@ -2,28 +2,31 @@ package com.rajendra.foodapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ListAdapter;
 
+import com.rajendra.foodapp.Api.RetrofitInstance;
+import com.rajendra.foodapp.Api.RetrofitInterface;
 import com.rajendra.foodapp.adapter.FoodAdapter;
 import com.rajendra.foodapp.model.Food;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ListFoodsActivity extends AppCompatActivity {
 
     GridView gvListFood;
     Button backButton;
-    ArrayList<Food> foodList;
+    List<Food> foodList;
     FoodAdapter foodAdapter;
 
     @Override
