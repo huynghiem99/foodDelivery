@@ -8,13 +8,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.rajendra.foodapp.model.Food;
+import com.rajendra.foodapp.model.Food1;
 
 public class DetailsActivity extends AppCompatActivity {
 
     ImageView backImg, foodImg;
     TextView textViewRating, textViewNumberOrder, textViewName, textViewType, textViewPrice,textViewDescription;
-    Food foodDetail;
+    Food1 foodDetail;
 
 
     @Override
@@ -29,7 +31,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     private void ReceivedData(){
         Intent i = getIntent();
-        foodDetail = (Food) i.getSerializableExtra("DetailFood");
+        foodDetail = (Food1) i.getSerializableExtra("DetailFood");
         System.out.println(foodDetail);
     }
 
@@ -46,11 +48,11 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void BindData(){
-        foodImg.setImageResource(foodDetail.getImageUrl());
+//        foodImg.setImageResource(foodDetail.getImageUrl());
         textViewName.setText(foodDetail.getName());
-        textViewRating.setText(foodDetail.getRating());
+        textViewRating.setText(foodDetail.getRating()+ "");
         textViewType.setText(foodDetail.getType());
-        textViewPrice.setText(foodDetail.getPrice());
+        textViewPrice.setText(foodDetail.getPrice()+ "");
         textViewDescription.setText(foodDetail.getDescription());
 
 
