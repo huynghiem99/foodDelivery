@@ -1,6 +1,8 @@
 package com.rajendra.foodapp.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +12,12 @@ import android.widget.TextView;
 
 import com.rajendra.foodapp.R;
 import com.rajendra.foodapp.model.Food;
+import com.rajendra.foodapp.model.Food1;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +25,9 @@ import java.util.List;
 public class FoodAdapter extends BaseAdapter {
 
     private Context context;
-    private List<Food> foods;
+    private List<Food1> foods;
 
-    public FoodAdapter(Context context, List<Food> foods) {
+    public FoodAdapter(Context context, List<Food1> foods) {
         this.context = context;
         this.foods = foods;
     }
@@ -57,12 +63,25 @@ public class FoodAdapter extends BaseAdapter {
         TextView nameRestaurent = viewHolder.findViewById(R.id.restorant_name);
         TextView ratingFood = viewHolder.findViewById(R.id.rating);
 
-        Food food = foods.get(i);
-        imageFood.setImageResource(food.getImageUrl());
+        Food1 food = foods.get(i);
+        URL url = null;
+        try {
+            url = new URL(food.getFoodImageUrl());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        Bitmap bmp = null;
+        try {
+            bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        imageFood.setImageBitmap(bmp);
+//        imageFood.setImageResource(food.getImageUrl());
         nameFood.setText(food.getName());
-        priceFood.setText(food.getPrice());
-        ratingFood.setText(food.getRating());
-        nameRestaurent.setText(food.getRestorantname());
+        priceFood.setText((int) food.getPrice());
+        ratingFood.setText((int) food.getRating());
+        nameRestaurent.setText(food.getNameRestaurent());
         return viewHolder;
     }
 

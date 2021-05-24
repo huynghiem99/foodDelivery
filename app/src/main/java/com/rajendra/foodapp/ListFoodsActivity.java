@@ -14,6 +14,7 @@ import com.rajendra.foodapp.Api.RetrofitInstance;
 import com.rajendra.foodapp.Api.RetrofitInterface;
 import com.rajendra.foodapp.adapter.FoodAdapter;
 import com.rajendra.foodapp.model.Food;
+import com.rajendra.foodapp.model.Food1;
 import com.rajendra.foodapp.model.GeneralFood;
 
 import java.io.Serializable;
@@ -28,7 +29,7 @@ public class ListFoodsActivity extends AppCompatActivity {
 
     GridView gvListFood;
     Button backButton;
-    List<Food> foodList;
+    List<Food1> foodList;
     GeneralFood generalFood;
     FoodAdapter foodAdapter;
 
@@ -98,14 +99,14 @@ public class ListFoodsActivity extends AppCompatActivity {
     private void CallData(){
             Intent i = getIntent();
             generalFood = (GeneralFood) i.getSerializableExtra("GeneralFood");
-            System.out.println(generalFood);
+            System.out.println(generalFood.getKey());
 
             if (generalFood.getKey() == "popularfood"){
                 RetrofitInterface retrofitInterface = RetrofitInstance.getRetrofitInstance().create(RetrofitInterface.class);
-                Call<List<Food>> listCall = retrofitInterface.getAllFood();
-                listCall.enqueue(new Callback<List<Food>>() {
+                Call<List<Food1>> listCall = retrofitInterface.getAllFood();
+                listCall.enqueue(new Callback<List<Food1>>() {
                     @Override
-                    public void onResponse(Call<List<Food>> call, Response<List<Food>> response) {
+                    public void onResponse(Call<List<Food1>> call, Response<List<Food1>> response) {
                         System.out.println(1);
                         if (response.body() != null) {
                             foodList = new ArrayList<>();
@@ -115,16 +116,16 @@ public class ListFoodsActivity extends AppCompatActivity {
                         }
                     }
                     @Override
-                    public void onFailure(Call<List<Food>> call, Throwable t) {
+                    public void onFailure(Call<List<Food1>> call, Throwable t) {
                         System.out.println(2);
                     }
                 });
             } else {
                 RetrofitInterface retrofitInterface = RetrofitInstance.getRetrofitInstance().create(RetrofitInterface.class);
-                Call<List<Food>> listCall = retrofitInterface.getAllFoodByType(generalFood.getKey());
-                listCall.enqueue(new Callback<List<Food>>() {
+                Call<List<Food1>> listCall = retrofitInterface.getAllFoodByType();
+                listCall.enqueue(new Callback<List<Food1>>() {
                     @Override
-                    public void onResponse(Call<List<Food>> call, Response<List<Food>> response) {
+                    public void onResponse(Call<List<Food1>> call, Response<List<Food1>> response) {
                         System.out.println(1);
                         if (response.body() != null) {
                             foodList = new ArrayList<>();
@@ -135,7 +136,7 @@ public class ListFoodsActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<List<Food>> call, Throwable t) {
+                    public void onFailure(Call<List<Food1>> call, Throwable t) {
                         System.out.println(2);
                     }
                 });
