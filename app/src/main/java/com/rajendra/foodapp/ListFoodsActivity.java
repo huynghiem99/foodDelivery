@@ -66,8 +66,8 @@ public class ListFoodsActivity extends AppCompatActivity {
     }
 
     private  void BindData(){
-        foodAdapter = new FoodAdapter(getApplicationContext(), foodList);
-        gvListFood.setAdapter(foodAdapter);
+//        foodAdapter = new FoodAdapter(getApplicationContext(), foodList);
+//        gvListFood.setAdapter(foodAdapter);
     }
 
     private void Event() {
@@ -107,10 +107,13 @@ public class ListFoodsActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<List<Food>> call, Response<List<Food>> response) {
                         System.out.println(1);
-                        foodList = new ArrayList<>();
-                        foodList = response.body();
+                        if (response.body() != null) {
+                            foodList = new ArrayList<>();
+                            foodList = response.body();
+                            foodAdapter = new FoodAdapter(getApplicationContext(), foodList);
+                            gvListFood.setAdapter(foodAdapter);
+                        }
                     }
-
                     @Override
                     public void onFailure(Call<List<Food>> call, Throwable t) {
                         System.out.println(2);
@@ -123,8 +126,12 @@ public class ListFoodsActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<List<Food>> call, Response<List<Food>> response) {
                         System.out.println(1);
-                        foodList = new ArrayList<>();
-                        foodList = response.body();
+                        if (response.body() != null) {
+                            foodList = new ArrayList<>();
+                            foodList = response.body();
+                            foodAdapter = new FoodAdapter(getApplicationContext(), foodList);
+                            gvListFood.setAdapter(foodAdapter);
+                        }
                     }
 
                     @Override
