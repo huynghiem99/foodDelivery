@@ -8,7 +8,9 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.content.Intent;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,6 +33,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     GridView gvGeneralFood;
+    TextView cartView;
     ArrayList<GeneralFood> generalFoodList;
     GeneralFoodAdapter generalFoodAdapter;
 
@@ -42,10 +45,12 @@ public class MainActivity extends AppCompatActivity {
         DataList();
         BindData();
         EventClickItems();
+        CartEvent();
     }
 
     private  void AnhXa(){
         gvGeneralFood = findViewById(R.id.gridViewGeneral);
+        cartView = findViewById(R.id.tvCart);
     }
 
     private void DataList() {
@@ -67,6 +72,15 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(MainActivity.this, ListFoodsActivity.class);
                 intent.putExtra("GeneralFood", (Serializable) generalFoodList.get(i));
+                startActivity(intent);
+            }
+        });
+    }
+
+    private  void CartEvent(){
+        cartView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CartActivity.class);
                 startActivity(intent);
             }
         });

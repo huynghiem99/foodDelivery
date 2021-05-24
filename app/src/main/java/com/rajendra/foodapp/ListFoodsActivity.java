@@ -37,8 +37,6 @@ public class ListFoodsActivity extends AppCompatActivity {
     GridView gvListFood;
     Button backButton;
     List<Food1> foodList = new ArrayList<>();
-    GeneralFood generalFood;
-    FoodAdapter foodAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

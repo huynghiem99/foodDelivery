@@ -9,10 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.rajendra.foodapp.model.Food;
 import com.rajendra.foodapp.model.Food1;
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailFoodNormal extends AppCompatActivity {
 
     ImageView backImg, foodImg;
     TextView textViewRating, textViewNumberOrder, textViewName, textViewType, textViewPrice,textViewDescription;
@@ -22,7 +21,7 @@ public class DetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
+        setContentView(R.layout.activity_detail_food_normal);
         this.ReceivedData();
         this.AnhXa();
         this.Event();
@@ -53,6 +52,7 @@ public class DetailsActivity extends AppCompatActivity {
                 .placeholder(R.mipmap.ic_launcher)
                 .centerCrop()
                 .into(foodImg);
+//        foodImg.setImageResource(foodDetail.getImageUrl());
         textViewName.setText(foodDetail.getName());
         textViewRating.setText(foodDetail.getRating()+ "");
         textViewType.setText(foodDetail.getType());
@@ -69,7 +69,7 @@ public class DetailsActivity extends AppCompatActivity {
     private  void BackEvent(){
         backImg.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                DetailsActivity.super.onBackPressed();
+                DetailFoodNormal.super.onBackPressed();
             }
         });
     }
