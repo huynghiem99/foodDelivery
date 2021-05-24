@@ -11,8 +11,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListAdapter;
-import android.widget.TextView;
-
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,9 +19,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.rajendra.foodapp.adapter.FoodAdapter;
-
+import com.rajendra.foodapp.adapter.FoodCartAdapter;
 import com.rajendra.foodapp.model.Food1;
-import com.rajendra.foodapp.model.GeneralFood;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,27 +30,26 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListFoodsActivity extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity {
 
     GridView gvListFood;
     Button backButton;
-    TextView titleTv;
     List<Food1> foodList = new ArrayList<>();
-    GeneralFood generalFood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_foods);
+        setContentView(R.layout.activity_cart);
+
         AnhXa();
         Event();
         CallData();
+
     }
 
     private  void AnhXa(){
-        gvListFood = findViewById(R.id.gvListViewFood);
-        backButton = findViewById(R.id.buttonBackListFood);
-        titleTv = findViewById(R.id.titleTextView);
+        gvListFood = findViewById(R.id.gvListCart);
+        backButton = findViewById(R.id.buttonBackCart);
     }
 
     private void Event() {
@@ -65,7 +61,7 @@ public class ListFoodsActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                ListFoodsActivity.super.onBackPressed();
+                CartActivity.super.onBackPressed();
             }
         });
     }
@@ -74,7 +70,7 @@ public class ListFoodsActivity extends AppCompatActivity {
         gvListFood.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(ListFoodsActivity.this, DetailsActivity.class);
+                Intent intent = new Intent(CartActivity.this, DetailFoodNormal.class);
                 intent.putExtra("DetailFood", (Serializable) foodList.get(i));
                 startActivity(intent);
             }
@@ -82,16 +78,7 @@ public class ListFoodsActivity extends AppCompatActivity {
     }
 
     private void CallData(){
-        String url;
-        Intent i = getIntent();
-        generalFood = (GeneralFood) i.getSerializableExtra("GeneralFood");
-        titleTv.setText(generalFood.getName());
-        if (generalFood.getName() == "Popular Food") {
-            url = "https://android-api-1610.herokuapp.com/api/food";
-        } else {
-            url = "https://android-api-1610.herokuapp.com/api/food/gettype?type="+generalFood.getKey();
-        }
-
+        String url = "https://android-api-1610.herokuapp.com/api/food";
         JsonArrayRequest stringRequest = new JsonArrayRequest(Request.Method.GET, url,null,new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray responsed) {
@@ -111,7 +98,7 @@ public class ListFoodsActivity extends AppCompatActivity {
                     }
 
                     Log.d("respose", responsed.toString());
-                    Adapter adapter = new FoodAdapter(getApplicationContext(),foodList);
+                    Adapter adapter = new FoodCartAdapter(getApplicationContext(),foodList);
                     gvListFood.setAdapter((ListAdapter) adapter);
                 }
                 catch (JSONException e ){
