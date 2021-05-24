@@ -1,9 +1,12 @@
 package com.rajendra.foodapp.model;
-public class Food1 {
+
+import java.io.Serializable;
+
+public class Food1 implements Serializable {
     private int id;
     private String name;
     private double price;
-    private float rating;
+    private double rating;
     private String type;
     private String nameRestaurent;
     private String foodImageUrl;
@@ -12,7 +15,7 @@ public class Food1 {
     public Food1() {
     }
 
-    public Food1(int id, String name, double price, float rating, String type, String nameRestaurent, String foodImageUrl, String description) {
+    public Food1(int id, String name, double price, double rating, String type, String nameRestaurent, String foodImageUrl, String description) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -47,11 +50,11 @@ public class Food1 {
         this.price = price;
     }
 
-    public float getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 

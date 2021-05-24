@@ -4,32 +4,39 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ListAdapter;
 
 
-import com.rajendra.foodapp.Api.RetrofitInstance;
-import com.rajendra.foodapp.Api.RetrofitInterface;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.rajendra.foodapp.adapter.FoodAdapter;
-import com.rajendra.foodapp.model.Food;
+
 import com.rajendra.foodapp.model.Food1;
 import com.rajendra.foodapp.model.GeneralFood;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class ListFoodsActivity extends AppCompatActivity {
 
     GridView gvListFood;
     Button backButton;
-    List<Food1> foodList;
+    List<Food1> foodList = new ArrayList<>();
     GeneralFood generalFood;
     FoodAdapter foodAdapter;
 
@@ -97,49 +104,42 @@ public class ListFoodsActivity extends AppCompatActivity {
     }
 
     private void CallData(){
-            Intent i = getIntent();
-            generalFood = (GeneralFood) i.getSerializableExtra("GeneralFood");
-            System.out.println(generalFood.getKey());
+        String url = "https://android-api-1610.herokuapp.com/api/food";
+        JsonArrayRequest stringRequest = new JsonArrayRequest(Request.Method.GET, url,null,new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray responsed) {
+                try {
+                    for (int i = 0 ; i < responsed.length() ; i++) {
+                        JSONObject response = (JSONObject) responsed.get(i);
+                        Food1 food1 = new Food1();
+                        food1.setName(response.getString("name"));
+                        food1.setPrice(response.getDouble("price"));
+                        food1.setRating(response.getDouble("rating"));
+                        food1.setType(response.getString("type"));
+                        food1.setNameRestaurent(response.getString("nameRestaurent"));
+                        food1.setFoodImageUrl(response.getString("foodImageUrl"));
+                        food1.setDescription(response.getString("description"));
+                        foodList.add(food1);
 
-            if (generalFood.getKey() == "popularfood"){
-                RetrofitInterface retrofitInterface = RetrofitInstance.getRetrofitInstance().create(RetrofitInterface.class);
-                Call<List<Food1>> listCall = retrofitInterface.getAllFood();
-                listCall.enqueue(new Callback<List<Food1>>() {
-                    @Override
-                    public void onResponse(Call<List<Food1>> call, Response<List<Food1>> response) {
-                        System.out.println(1);
-                        if (response.body() != null) {
-                            foodList = new ArrayList<>();
-                            foodList = response.body();
-                            foodAdapter = new FoodAdapter(getApplicationContext(), foodList);
-                            gvListFood.setAdapter(foodAdapter);
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<List<Food1>> call, Throwable t) {
-                        System.out.println(2);
-                    }
-                });
-            } else {
-                RetrofitInterface retrofitInterface = RetrofitInstance.getRetrofitInstance().create(RetrofitInterface.class);
-                Call<List<Food1>> listCall = retrofitInterface.getAllFoodByType();
-                listCall.enqueue(new Callback<List<Food1>>() {
-                    @Override
-                    public void onResponse(Call<List<Food1>> call, Response<List<Food1>> response) {
-                        System.out.println(1);
-                        if (response.body() != null) {
-                            foodList = new ArrayList<>();
-                            foodList = response.body();
-                            foodAdapter = new FoodAdapter(getApplicationContext(), foodList);
-                            gvListFood.setAdapter(foodAdapter);
-                        }
                     }
 
-                    @Override
-                    public void onFailure(Call<List<Food1>> call, Throwable t) {
-                        System.out.println(2);
-                    }
-                });
+                    Log.d("respose", responsed.toString());
+                    Adapter adapter = new FoodAdapter(getApplicationContext(),foodList);
+                    gvListFood.setAdapter((ListAdapter) adapter);
+                }
+                catch (JSONException e ){
+                    e.printStackTrace();
+                }
+
             }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("listd" , error.toString());
+            }
+        });
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(stringRequest);
     }
 }

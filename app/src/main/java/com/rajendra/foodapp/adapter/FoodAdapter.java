@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.rajendra.foodapp.R;
 import com.rajendra.foodapp.model.Food;
 import com.rajendra.foodapp.model.Food1;
@@ -64,23 +65,16 @@ public class FoodAdapter extends BaseAdapter {
         TextView ratingFood = viewHolder.findViewById(R.id.rating);
 
         Food1 food = foods.get(i);
-        URL url = null;
-        try {
-            url = new URL(food.getFoodImageUrl());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        Bitmap bmp = null;
-        try {
-            bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        imageFood.setImageBitmap(bmp);
-//        imageFood.setImageResource(food.getImageUrl());
+
+        Glide.with(viewHolder)
+                .load(food.getFoodImageUrl())
+                .placeholder(R.mipmap.ic_launcher)
+                .centerCrop()
+                .into(imageFood);
+
         nameFood.setText(food.getName());
-        priceFood.setText((int) food.getPrice());
-        ratingFood.setText((int) food.getRating());
+        priceFood.setText(food.getPrice() + "");
+        ratingFood.setText(food.getRating() + "");
         nameRestaurent.setText(food.getNameRestaurent());
         return viewHolder;
     }
