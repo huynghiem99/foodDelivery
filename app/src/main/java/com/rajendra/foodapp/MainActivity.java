@@ -20,6 +20,7 @@ import com.rajendra.foodapp.model.Food;
 import com.rajendra.foodapp.model.GeneralFood;
 import com.rajendra.foodapp.model.PhotoModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         DataList();
         BindData();
         EventClickItems();
-        callData();
     }
 
     private  void AnhXa(){
@@ -50,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void DataList() {
         generalFoodList = new ArrayList<>();
-        generalFoodList.add(new GeneralFood("Popular Food",R.drawable.a));
-        generalFoodList.add(new GeneralFood("Asia Food",R.drawable.b));
-        generalFoodList.add(new GeneralFood("Europe Food",R.drawable.c));
-        generalFoodList.add(new GeneralFood("Africa Food",R.drawable.d));
+        generalFoodList.add(new GeneralFood("Popular Food",R.drawable.a,"popularfood"));
+        generalFoodList.add(new GeneralFood("Asia Food",R.drawable.b,"asiafood"));
+        generalFoodList.add(new GeneralFood("Europe Food",R.drawable.c,"europefood"));
+        generalFoodList.add(new GeneralFood("Africa Food",R.drawable.d,"africafood"));
     }
 
     private  void BindData(){
@@ -65,28 +65,9 @@ public class MainActivity extends AppCompatActivity {
         gvGeneralFood.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                openFoodListScreen();
-            }
-        });
-    }
-
-    private void openFoodListScreen() {
-        Intent intent = new Intent(MainActivity.this, ListFoodsActivity.class);
-        startActivity(intent);
-    }
-
-    private void callData(){
-        RetrofitInterface retrofitInterface = RetrofitInstance.getRetrofitInstance().create(RetrofitInterface.class);
-        Call<List<PhotoModel>> listCall = retrofitInterface.getAllPhotos();
-        listCall.enqueue(new Callback<List<PhotoModel>>() {
-            @Override
-            public void onResponse(Call<List<PhotoModel>> call, Response<List<PhotoModel>> response) {
-                System.out.println(1);
-            }
-
-            @Override
-            public void onFailure(Call<List<PhotoModel>> call, Throwable t) {
-                System.out.println(2);
+                Intent intent = new Intent(MainActivity.this, ListFoodsActivity.class);
+                intent.putExtra("GeneralFood", (Serializable) generalFoodList.get(i));
+                startActivity(intent);
             }
         });
     }

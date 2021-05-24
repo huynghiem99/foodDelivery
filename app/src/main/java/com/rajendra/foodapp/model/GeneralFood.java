@@ -3,10 +3,12 @@ package com.rajendra.foodapp.model;
 public class GeneralFood {
     private String name;
     private int imageGeneral;
+    private  String key;
 
-    public GeneralFood(String name, int imageGeneral) {
+    public GeneralFood(String name, int imageGeneral, String key) {
         this.name = name;
         this.imageGeneral = imageGeneral;
+        this.key = key;
     }
 
     public String getName() {
@@ -25,5 +27,11 @@ public class GeneralFood {
         this.imageGeneral = imageGeneral;
     }
 
+    public String getKey() {
+        return key;
+    }
 
+    public void setKey(String key) {
+        this.key = key;
+    }
 }
