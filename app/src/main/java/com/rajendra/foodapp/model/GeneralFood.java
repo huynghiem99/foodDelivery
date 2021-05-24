@@ -1,6 +1,8 @@
 package com.rajendra.foodapp.model;
 
-public class GeneralFood {
+import java.io.Serializable;
+
+public class GeneralFood implements Serializable {
     private String name;
     private int imageGeneral;
     private  String key;

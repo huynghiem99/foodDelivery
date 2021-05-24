@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.rajendra.foodapp.Api.RetrofitInstance;
 import com.rajendra.foodapp.Api.RetrofitInterface;
 import com.rajendra.foodapp.adapter.FoodAdapter;
