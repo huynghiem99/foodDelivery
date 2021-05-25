@@ -78,7 +78,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private void CallData(){
-        String url = "https://android-api-1610.herokuapp.com/api/food";
+        String url = "https://android-api-1610.herokuapp.com/api/cart/getcart";
         JsonArrayRequest stringRequest = new JsonArrayRequest(Request.Method.GET, url,null,new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray responsed) {
