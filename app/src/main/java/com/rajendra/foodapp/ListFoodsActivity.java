@@ -99,6 +99,7 @@ public class ListFoodsActivity extends AppCompatActivity {
                     for (int i = 0 ; i < responsed.length() ; i++) {
                         JSONObject response = (JSONObject) responsed.get(i);
                         Food1 food1 = new Food1();
+                        food1.setId(response.getInt("id"));
                         food1.setName(response.getString("name"));
                         food1.setPrice(response.getDouble("price"));
                         food1.setRating(response.getDouble("rating"));
